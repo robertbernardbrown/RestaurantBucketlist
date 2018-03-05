@@ -1,29 +1,32 @@
 const pool = require("./connection");
 
 const orm = {
-  selectAll: function (table) {
-    let query = "SELECT * FROM ??";
+  selectAll: function (table, cb) {
+    let query = "SELECT * FROM ?";
     pool.query(query, [table], (err, res) => {
       if (err) throw err;
       console.log(res);
+      cb(res);
     });
   },
-  insertOne: function (restaurant) {
-    let query = "INSERT INTO restaurants ";
+  insertOne: function (table, restaurant, cb) {
+    let query = "INSERT INTO ? ";
     query    += "SET restaurant=?, visited=?";
-    pool.query(query, [restaurant, 0], (err, res) => {
+    pool.query(query, [table, restaurant, 0], (err, res) => {
       if (err) throw err;
       console.log(res);
+      cb(res);
     });
   },
-  updateOne: function (visited, id) {
-    let query = "UPDATE restaurants";
+  updateOne: function (restaurant, visited, id, cb) {
+    let query = "UPDATE table=?";
     query    += " SET visited=?";
     query    += " WHERE id=?";
     console.log(query);
-    pool.query(query, [visited, id], (err, res) => {
+    pool.query(query, [restaurant, visited, id], (err, res) => {
       if (err) throw err;
       console.log(res);
+      cb(res);
     });
   }
 };
