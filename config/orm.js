@@ -20,14 +20,12 @@ const orm = {
     });
   },
   updateOne: (table, visitedBool, id, cb) => {
-    let query = "UPDATE ?? ";
-    query    += "SET visited=? ";
-    query    += "WHERE id=?";
+    let query = "UPDATE ??";
+    query    += " SET visited = ?";
+    query    += " WHERE id = ?";
+    console.log(query);
     pool.query(query, [table, visitedBool, id], (err, res) => {
-      console.log(table, visitedBool, id);
-      console.log(query);
       if (err) throw err;
-      console.log(res);
       cb(res);
     });
   }

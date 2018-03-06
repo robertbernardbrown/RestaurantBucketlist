@@ -19,6 +19,6 @@ app.set("view engine", "handlebars");
 const routes = require("./controllers/restaurant_controller");
 app.use(routes);
 
-app.listen(port, function() {
+app.listen(port, ()=> {
   console.log("App is running on port " + port);
 });

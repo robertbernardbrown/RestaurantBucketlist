@@ -17,8 +17,8 @@ router.post("/", (req, res) => {
 });
 
 router.put("/:id", (req, res) => {
-  var condition = "id=" + req.params.id;
-  console.log("condition", condition);
+  var condition = req.params.id;
+  console.log("condition id:", condition);
   console.log(req.body.visited);
   restaurant.update(req.body.visited, condition, data => {
     if (data.changedRows === 0) {
