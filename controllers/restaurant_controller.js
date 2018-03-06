@@ -4,8 +4,11 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
   restaurant.all(data => {
-    console.log(data);
-    // res.render("index", hbsObject);
+    let hbsObject = {
+      restaurant: data
+    };
+    console.log(hbsObject);
+    res.render("index", hbsObject);
   });
 });
 
@@ -30,5 +33,4 @@ router.put("/:id", (req, res) => {
   });
 });
 
-// Export routes for server.js to use.
 module.exports = router;
