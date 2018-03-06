@@ -1,21 +1,21 @@
 const orm = require("../config/orm");
 
-var restaurant = {
-  all: function(cb) {
-    orm.selectAll("restaurants", function(res) {
+const restaurant = {
+  all: cb => {
+    orm.selectAll("restaurants", res => {
       cb(res);
     });
   },
-  create: function(restaurant, cb) {
-    orm.insertOne("restaurants", restaurant, function(res) {
+  create: (restaurant, cb) => {
+    orm.insertOne("restaurants", restaurant, res => {
       cb(res);
     });
   },
-  update: function(visitedBool, id, cb) {
-    orm.updateOne("restaurants", visitedBool, id, function(res) {
+  update: (visitedBool, id, cb) => {
+    orm.updateOne("restaurants", visitedBool, id, res => {
       cb(res);
     });
-  },
+  }
 };
 
 module.exports = restaurant;

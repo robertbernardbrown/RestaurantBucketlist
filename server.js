@@ -10,9 +10,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname + "/public")));
 
-require("./app/routing/apiRoutes")(app);
-require("./app/routing/htmlRoutes")(app);
+//LOAD MIDDLEWARE (HANDLEBARS)
+const expHbs = require("express-handlebars");
+app.engine("handlebars", expHbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
+//ROUTER
+const routes = require("./controllers/restaurant_controller");
+app.use(routes);
 
 app.listen(port, function() {
-    console.log("App is running on port " + port);
+  console.log("App is running on port " + port);
 });
