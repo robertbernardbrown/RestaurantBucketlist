@@ -5,7 +5,7 @@
 <ul>
   {{#each restaurant}}
     {{#unless this.visited}}
-      {{> restaurants/restaurant-block visited=true}}
+      {{> restaurants/restaurant-block visited=1}}
     {{/unless}}
   {{/each}}
 </ul>
@@ -15,7 +15,7 @@
 <ul>
   {{#each restaurant}}
     {{#if this.visited}}
-      {{> restaurants/restaurant-block visited=false}}
+      {{> restaurants/restaurant-block visited=0}}
     {{/if}}
   {{/each}}
 </ul>

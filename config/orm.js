@@ -23,7 +23,6 @@ const orm = {
     let query = "UPDATE ??";
     query    += " SET visited = ?";
     query    += " WHERE id = ?";
-    console.log(query);
     pool.query(query, [table, visitedBool, id], (err, res) => {
       if (err) throw err;
       cb(res);
