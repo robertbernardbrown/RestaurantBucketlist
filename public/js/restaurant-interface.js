@@ -18,42 +18,37 @@ $(function() {
       }
     );
   });
+
+  $(".create-form").on("submit", function(event) {
+    event.preventDefault();
   
-//   $(".create-form").on("submit", function(event) {
-//     // Make sure to preventDefault on a submit event.
-//     event.preventDefault();
+    var newRestaurant = {
+      restaurant: $("#rest").val().trim(),
+    };
   
-//     var newCat = {
-//       name: $("#ca").val().trim(),
-//       sleepy: $("[name=sleepy]:checked").val().trim()
-//     };
+    $.ajax("/", {
+      type: "POST",
+      data: newRestaurant
+    }).then(
+      function() {
+        console.log("created new restaurant");
+        location.reload();
+      }
+    );
+  });
   
-//       // Send the POST request.
-//     $.ajax("/api/cats", {
-//       type: "POST",
-//       data: newCat
-//     }).then(
-//       function() {
-//         console.log("created new cat");
-//         // Reload the page to get the updated list
-//         location.reload();
-//       }
-//     );
-//   });
+  $(".delete-rest").on("click", function(event) {
   
-//   $(".delete-form").on("click", function(event) {
+    var restId = $(this).data("id");
   
-//     var catId = $(this).data("id");
-  
-//     // Send the POST request.
-//     $.ajax("/api/cats/" + catId, {
-//       type: "DELETE"
-//     }).then(
-//       function() {
-//         console.log("deleted", catId);
-//         // Reload the page to get the updated list
-//         location.reload();
-//       }
-//     );
-//   });
+    $.ajax("/" + restId, {
+      type: "DELETE"
+    }).then(
+      function() {
+        console.log("deleted", catId);
+        // Reload the page to get the updated list
+        location.reload();
+      }
+    );
+  });
 });
