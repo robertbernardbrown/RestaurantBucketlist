@@ -1,5 +1,5 @@
 $(function() {
-  $(".change-visited").on("click", function(event) {
+  $(".change-visited").on("click", function() {
     let id = $(this).data("id");
     let newVisit = $(this).data("newvisit");
     let newVisitState = {
@@ -35,7 +35,7 @@ $(function() {
     );
   });
   
-  $(".delete-rest").on("click", function(event) {
+  $(".delete-rest").on("click", function() {
     var restId = $(this).data("id");
     $.ajax("/" + restId, {
       type: "DELETE"
