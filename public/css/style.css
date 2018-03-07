@@ -1,7 +1,18 @@
-#label {
-    margin: 6%;
+ul {
+    list-style-type: none;
+    padding: 0;
 }
 
-button {
-    float: right;
+#label {
+  margin-bottom: 5px;
+  background: #eeeeee;
+  height: 30px;
+}
+
+.inline {
+  display: inline-block;
+}
+
+.submit-btn {
+  margin-bottom: 1%;
 }
