@@ -1,13 +1,10 @@
 $(function() {
   $(".change-visited").on("click", function(event) {
-    var id = $(this).data("id");
-    var newVisit = $(this).data("newvisit");
-    console.log(newVisit);
-    var newVisitState = {
+    let id = $(this).data("id");
+    let newVisit = $(this).data("newvisit");
+    let newVisitState = {
       visited: newVisit
     };
-    console.log(newVisitState);
-  
     $.ajax("/" + id, {
       type: "PUT",
       data: newVisitState
@@ -21,11 +18,12 @@ $(function() {
 
   $(".create-form").on("submit", function(event) {
     event.preventDefault();
-  
-    var newRestaurant = {
+    let newRestaurant = {
       restaurant: $("#rest").val().trim(),
     };
-  
+    if (newRestaurant.restaurant === "") {
+      return alert("Please enter a restaurant!");
+    }
     $.ajax("/", {
       type: "POST",
       data: newRestaurant
@@ -38,10 +36,8 @@ $(function() {
   });
   
   $(".delete-rest").on("click", function(event) {
-  
     var restId = $(this).data("id");
     console.log(restId);
-  
     $.ajax("/" + restId, {
       type: "DELETE"
     }).then(
