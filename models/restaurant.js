@@ -15,6 +15,11 @@ const restaurant = {
     orm.updateOne("restaurants", visitedBool, id, res => {
       cb(res);
     });
+  },
+  delete: (id, cb) => {
+    orm.deleteOne("restaurants", id, res => {
+      cb(res);
+    });
   }
 };
 

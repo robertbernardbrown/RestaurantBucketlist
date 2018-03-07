@@ -33,4 +33,17 @@ router.put("/:id", (req, res) => {
   });
 });
 
+router.delete("/:id", (req, res) => {
+  var condition = req.params.id;
+  restaurant.delete( condition, data => {
+    console.log(data);
+    if (data.alteredRows === 0) {
+      return res.status(404).end();
+    } else {
+      res.status(200).end();
+    }
+    console.log(data);
+  });
+});
+
 module.exports = router;

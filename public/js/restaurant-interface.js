@@ -40,13 +40,13 @@ $(function() {
   $(".delete-rest").on("click", function(event) {
   
     var restId = $(this).data("id");
+    console.log(restId);
   
     $.ajax("/" + restId, {
       type: "DELETE"
     }).then(
       function() {
-        console.log("deleted", catId);
-        // Reload the page to get the updated list
+        console.log("deleted", restId);
         location.reload();
       }
     );
