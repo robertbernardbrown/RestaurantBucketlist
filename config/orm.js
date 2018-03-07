@@ -4,9 +4,7 @@ const orm = {
   selectAll: (table, cb) => {
     let query = "SELECT * FROM ??";
     pool.query(query, [table], (err, res) => {
-      console.log(query);
       if (err) throw err;
-      console.log(res);
       cb(res);
     });
   },
@@ -15,7 +13,6 @@ const orm = {
     query    += "SET restaurant=?, visited=?";
     pool.query(query, [table, restaurant, false], (err, res) => {
       if (err) throw err;
-      console.log(res);
       cb(res);
     });
   },

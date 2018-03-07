@@ -10,7 +10,7 @@ $(function() {
       data: newVisitState
     }).then(
       function() {
-        console.log("changed visit to", newVisit);
+        // console.log("changed visit to", newVisit);
         location.reload();
       }
     );
@@ -29,7 +29,7 @@ $(function() {
       data: newRestaurant
     }).then(
       function() {
-        console.log("created new restaurant");
+        // console.log("created new restaurant");
         location.reload();
       }
     );
@@ -37,12 +37,11 @@ $(function() {
   
   $(".delete-rest").on("click", function(event) {
     var restId = $(this).data("id");
-    console.log(restId);
     $.ajax("/" + restId, {
       type: "DELETE"
     }).then(
       function() {
-        console.log("deleted", restId);
+        // console.log("deleted", restId);
         location.reload();
       }
     );

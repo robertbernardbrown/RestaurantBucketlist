@@ -1,10 +1,9 @@
-<li>
+<li class="{{id}}" id="label">
 	{{restaurant}}
-	<button class="change-visited" data-id="{{id}}" data-newvisit="{{visited}}">
-		{{#if visited}}Visited{{else}}Move back to Bucketlist{{/if}}
+	<button class="change-visited btn btn-primary" data-id="{{id}}" data-newvisit="{{visited}}">
+		{{#if visited}}Visited{{else}}Move back{{/if}}
 	</button>
-	<button class="delete-rest" data-id="{{id}}">
+	<button class="delete-rest btn btn-danger" data-id="{{id}}">
 		Delete
 	</button>
-
 </li>
