@@ -3,39 +3,23 @@
   <p>Jot down a restaurant and mark it off your list once you've visited!</p>
 </div>
 
-<div class="page-header text-center">
-  <h2>Bucketlist</h2>
-</div>
-
-  <ul>
-    {{#each restaurant}}
-      {{#unless this.visited}}
-        {{> restaurants/restaurant-block visited=1}}
-      {{/unless}}
-    {{/each}}
-  </ul>
-
-<div class="page-header text-center">
-  <h2>Visited</h2>
-</div>
-
-  <ul>
-    {{#each restaurant}}
-      {{#if this.visited}}
-        {{> restaurants/restaurant-block visited=0}}
-      {{/if}}
-    {{/each}}
-  </ul>
-
-<div class="page-header text-center">
-<h2>Add to your bucketlist</h2>
-</div>
-<form class="create-form">
-  <div class="form-group col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4">
-    <label for="rest">Restaurant Name:</label>
-    <input type="text" id="rest" name="name">
+<form method="POST" action="/register">
+  <div class="form-group">
+    <label for="exampleUserName1">Username</label>
+    <input type="username" name="username" class="form-control" id="exampleUsername1" aria-describedby="usernameHelp" placeholder="Enter username">
+    <small id="tip" class="form-text text-muted">Since this is just a dummy app, don't use any real usernames or passwords you may use for other sites</small>
   </div>
-    <button class="btn btn-primary btn-block submit-btn" type="submit">
-      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-      Add Restaurant</button>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword2">Please re-enter password to confirm</label>
+    <input type="password2" name="password2" class="form-control" id="exampleInputPassword2" placeholder="Password">
+  </div>
+  <div class="form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
 </form>
