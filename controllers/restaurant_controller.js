@@ -2,16 +2,19 @@ const restaurant = require("../models/restaurant");
 const express = require("express");
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.render("index");
+router.get("/register", (req, res) => {
+  res.render("register");
 });
 
 router.post("/register", (req, res) => {
+  let username = req.body.username;
+  let password = req.body.password;
+  console.log(username, password);
+  restaurant.auth(username, password, (data) => {
+    console.log(data);
+  });
 
-  console.log(req.body.username);
-  console.log(req.body.password);
-
-  res.render("index");
+  res.render("register");
 });
 
 // router.get("/", (req, res) => {

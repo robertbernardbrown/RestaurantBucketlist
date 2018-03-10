@@ -32,6 +32,17 @@ const orm = {
       if (err) throw err;
       cb(res);
     });
+  },
+  userAuth: (table, username, password, cb) => {
+    console.log(table, username, password);
+    let query = "INSERT INTO ??";
+    query    += " (username, password)";
+    query    += " VALUES (?, ?)";
+    console.log(query);
+    pool.query(query, [table, username, password], (err, res) => {
+      if (err) throw err;
+      cb(res);
+    });
   }
 };
 

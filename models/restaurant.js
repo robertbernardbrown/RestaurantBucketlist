@@ -20,6 +20,11 @@ const restaurant = {
     orm.deleteOne("restaurants", id, res => {
       cb(res);
     });
+  },
+  auth: (username, password, cb) => {
+    orm.userAuth("users", username, password, res => {
+      cb(res);
+    });
   }
 };
 
