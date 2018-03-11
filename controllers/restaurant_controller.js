@@ -8,7 +8,7 @@ router.get("/register", (req, res) => {
   res.render("register");
 });
 
-router.post("/register", oneOf([
+router.post("/register",
   [
     check("username", "Username field can't be empty.")
       .exists()
@@ -19,23 +19,21 @@ router.post("/register", oneOf([
     check("password2", "Password Confirmation field must match password field")
       .exists()
       .custom((value, { req }) => value === req.body.password)
-  ],
-]),(req, res) => {
-  let username = req.body.username;
-  let password = req.body.password;
+  ],(req, res) => {
+    let username = req.body.username;
+    let password = req.body.password;
 
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.mapped() });
-  }
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.render("register", {errors: errors.array()});
+    }
 
-  console.log(username, password);
-  restaurant.auth(username, password, (data) => {
-    console.log(data);
+    restaurant.auth(username, password, (data) => {
+      console.log(data);
+    });
+
+    res.render("register");
   });
-
-  res.render("register");
-});
 
 // router.get("/", (req, res) => {
 //   restaurant.all(data => {
