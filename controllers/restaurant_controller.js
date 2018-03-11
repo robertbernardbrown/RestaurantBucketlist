@@ -1,8 +1,9 @@
 const restaurant                  = require("../models/restaurant");
 const express                     = require("express");
 const router                      = express.Router();
-const { check, oneOf,validationResult } = require("express-validator/check");
-const { matchedData, sanitize }   = require("express-validator/filter");
+const { check,validationResult }  = require("express-validator/check");
+const bcrypt                      = require("bcrypt");
+const saltRounds                  = 10;
 
 router.get("/register", (req, res) => {
   res.render("register");
@@ -26,13 +27,14 @@ router.post("/register",
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.render("register", {errors: errors.array()});
+    } 
+    else {
+      bcrypt.hash(password, saltRounds, function(err, hash) {
+        restaurant.auth(username, hash, () => {
+          res.render("register");
+        });
+      });
     }
-
-    restaurant.auth(username, password, (data) => {
-      console.log(data);
-    });
-
-    res.render("register");
   });
 
 // router.get("/", (req, res) => {
