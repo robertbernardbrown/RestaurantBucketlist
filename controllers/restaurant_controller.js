@@ -6,6 +6,10 @@ const bcrypt                      = require("bcrypt");
 const saltRounds                  = 10;
 const passport                    = require("passport");
 
+router.get("/", (req, res) => {
+  res.render("index");
+});
+
 router.get("/register", (req, res) => {
   console.log(req.user);
   console.log(req.isAuthenticated());
@@ -24,7 +28,7 @@ router.post("/register",
       .exists()
       .custom((value, { req }) => value === req.body.password)
   ],(req, result) => {
-    username = req.body.username;
+    let username = req.body.username;
     let password = req.body.password;
 
     const errors = validationResult(req);
@@ -46,13 +50,22 @@ router.post("/register",
     }
   });
 
-router.get("/", (req, res) => {
-  // restaurant.all(data => {
-  //   let hbsObject = {
-  //     restaurant: data
-  //   };
-  res.render("index");
-  // });
+router.get("/login", (req, res) => {
+  res.render("login");
+});
+
+router.post("/login", passport.authenticate("local", {
+  successRedirect: "/bucketlist",
+  failureRedirect: "/login"
+}));
+
+router.get("/bucketlist", authenticationMiddleware(), (req, res) => {
+  restaurant.all(data => {
+    let hbsObject = {
+      restaurant: data
+    };
+    res.render("restaurant-user-list", hbsObject);
+  });
 });
 
 // router.post("/", (req, res) => {
@@ -91,5 +104,13 @@ passport.serializeUser(function(user_id, done) {
 passport.deserializeUser(function(user_id, done) {
   done(null, user_id);
 });
+
+function authenticationMiddleware () {  
+  return (req, res, next) => {
+    console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
+    if (req.isAuthenticated()) return next();
+    res.redirect("/login");
+  };
+}
 
 module.exports = router;

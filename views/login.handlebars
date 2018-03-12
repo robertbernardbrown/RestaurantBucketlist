@@ -1,8 +1,8 @@
 <div class="jumbotron text-center">
   <h1>Restaurant Bucketlist</h1>
-  <p>Registration Page</p>
-  <a href="/login">
-    <button type="login" class="btn btn-primary">Log-In</button>
+  <p>Login Page</p>
+  <a href="/register">
+    <button type="register" class="btn btn-primary">Register</button>
   </a>
   <a href="/bucketlist">
     <button type="bucketlist" class="btn btn-primary">Bucketlist</button>
@@ -17,19 +17,14 @@
   {{/each}}
 {{/if}}
 
-<form method="POST" action="/register">
+<form method="POST" action="/login">
   <div class="form-group">
     <label for="exampleUserName1">Username</label>
     <input type="username" name="username" class="form-control" id="exampleUsername1" aria-describedby="usernameHelp" placeholder="Enter username">
-    <small id="tip" class="form-text text-muted">Since this is just a dummy app, be extra safe and don't use any real usernames or passwords you may use for other sites</small>
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
     <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword2">Please re-enter password to confirm</label>
-    <input type="password" name="password2" class="form-control" id="exampleInputPassword2" placeholder="Password">
   </div>
   <div class="form-check">
     <input type="checkbox" class="form-check-input" id="exampleCheck1">

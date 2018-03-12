@@ -30,6 +30,11 @@ const restaurant = {
     orm.getSession(res => {
       cb(res);
     });
+  },
+  login: (username, cb) => {
+    orm.login("users", username, (err, res) => {
+      cb(err, res);
+    });
   }
 };
 

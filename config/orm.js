@@ -50,6 +50,14 @@ const orm = {
       cb(res);
     });
   },
+  login: (table, username, cb) => {
+    let query = "SELECT id, password FROM ?? WHERE username = ?";
+    pool.query(query, [table, username], (err, res) => {
+      if (err) throw err;
+      cb(err, res);
+    });
+
+  },
 };
 
 module.exports = orm;
