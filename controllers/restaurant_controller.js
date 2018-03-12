@@ -4,8 +4,11 @@ const router                      = express.Router();
 const { check,validationResult }  = require("express-validator/check");
 const bcrypt                      = require("bcrypt");
 const saltRounds                  = 10;
+const passport                    = require("passport");
 
 router.get("/register", (req, res) => {
+  console.log(req.user);
+  console.log(req.isAuthenticated());
   res.render("register");
 });
 
@@ -20,31 +23,37 @@ router.post("/register",
     check("password2", "Password Confirmation field must match password field")
       .exists()
       .custom((value, { req }) => value === req.body.password)
-  ],(req, res) => {
-    let username = req.body.username;
+  ],(req, result) => {
+    username = req.body.username;
     let password = req.body.password;
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.render("register", {errors: errors.array()});
+      return result.render("register", {errors: errors.array()});
     } 
     else {
       bcrypt.hash(password, saltRounds, function(err, hash) {
         restaurant.auth(username, hash, () => {
-          res.render("register");
+          restaurant.sess( (res) => {
+            const user_id = res[0];
+            console.log(user_id);
+            req.login(user_id, err => {
+              result.redirect("/");
+            });
+          });
         });
       });
     }
   });
 
-// router.get("/", (req, res) => {
-//   restaurant.all(data => {
-//     let hbsObject = {
-//       restaurant: data
-//     };
-//     res.render("index", hbsObject);
-//   });
-// });
+router.get("/", (req, res) => {
+  // restaurant.all(data => {
+  //   let hbsObject = {
+  //     restaurant: data
+  //   };
+  res.render("index");
+  // });
+});
 
 // router.post("/", (req, res) => {
 //   restaurant.create(req.body.restaurant, data => {
@@ -73,5 +82,14 @@ router.post("/register",
 //     }
 //   });
 // });
+
+
+passport.serializeUser(function(user_id, done) {
+  done(null, user_id);
+});
+
+passport.deserializeUser(function(user_id, done) {
+  done(null, user_id);
+});
 
 module.exports = router;

@@ -25,6 +25,11 @@ const restaurant = {
     orm.userAuth("users", username, password, res => {
       cb(res);
     });
+  },
+  sess: cb => {
+    orm.getSession(res => {
+      cb(res);
+    });
   }
 };
 
