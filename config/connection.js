@@ -7,4 +7,17 @@ const pool  = mysql.createPool({
   port: 3306
 });
 
+// const pool  = mysql.createPool({
+//   host     : "localhost",
+//   user     : "root",
+//   password : "root",
+//   database : "bucketlistdb",
+//   port: 3306
+// });
+
+// pool.query("SELECT 1 + 1 AS solution", function (error, results) {
+//   if (error) throw error;
+//   console.log("The solution is: ", results[0].solution);
+// });
+
 module.exports = pool;

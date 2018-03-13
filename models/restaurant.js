@@ -1,13 +1,13 @@
 const orm = require("../config/orm");
 
 const restaurant = {
-  all: cb => {
-    orm.selectAll("restaurants", res => {
+  all: (user_id, cb) => {
+    orm.selectAll("restaurants", user_id, res => {
       cb(res);
     });
   },
-  create: (restaurant, cb) => {
-    orm.insertOne("restaurants", restaurant, res => {
+  create: (restaurant, user_id, cb) => {
+    orm.insertOne("restaurants", restaurant, user_id, res => {
       cb(res);
     });
   },
@@ -19,6 +19,21 @@ const restaurant = {
   delete: (id, cb) => {
     orm.deleteOne("restaurants", id, res => {
       cb(res);
+    });
+  },
+  auth: (username, password, cb) => {
+    orm.userAuth("users", username, password, res => {
+      cb(res);
+    });
+  },
+  login: (username, cb) => {
+    orm.login("users", username, (err, res) => {
+      cb(err, res);
+    });
+  },
+  findOne: (username, cb) => {
+    orm.findByUsername("user_id", "users", username, (err, res) => {
+      cb(err, res);
     });
   }
 };
