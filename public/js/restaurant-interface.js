@@ -5,7 +5,7 @@ $(function() {
     let newVisitState = {
       visited: newVisit
     };
-    $.ajax("/" + id, {
+    $.ajax("/bucketlist" + id, {
       type: "PUT",
       data: newVisitState
     }).then(
@@ -24,7 +24,7 @@ $(function() {
     if (newRestaurant.restaurant === "") {
       return alert("Please enter a restaurant!");
     }
-    $.ajax("/", {
+    $.ajax("/bucketlist", {
       type: "POST",
       data: newRestaurant
     }).then(
@@ -37,7 +37,7 @@ $(function() {
   
   $(".delete-rest").on("click", function() {
     var restId = $(this).data("id");
-    $.ajax("/" + restId, {
+    $.ajax("/bucketlist" + restId, {
       type: "DELETE"
     }).then(
       function() {

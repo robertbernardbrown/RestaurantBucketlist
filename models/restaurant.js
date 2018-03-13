@@ -1,13 +1,14 @@
 const orm = require("../config/orm");
 
 const restaurant = {
-  all: cb => {
-    orm.selectAll("restaurants", res => {
+  all: (user_id, cb) => {
+    orm.selectAll("restaurants", user_id, res => {
       cb(res);
     });
   },
-  create: (restaurant, cb) => {
-    orm.insertOne("restaurants", restaurant, res => {
+  create: (restaurant, user_id, cb) => {
+    console.log(restaurant, user_id);
+    orm.insertOne("restaurants", restaurant, user_id, res => {
       cb(res);
     });
   },

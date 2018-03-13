@@ -20,7 +20,7 @@ options = {
   host     : "localhost",
   user     : "root",
   password : "root",
-  database : "credentials",
+  database : "bucketlistdb",
   port: 3306
 };
 var sessionStore = new MySQLStore(options);
@@ -39,6 +39,10 @@ const expHbs = require("express-handlebars");
 app.engine("handlebars", expHbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
+app.use(function( req, res, next) {
+  res.locals.isAuthenticated = req.isAuthenticated();
+  next();
+});
 //ROUTER
 const routes = require("./controllers/restaurant_controller");
 app.use(routes);
@@ -49,17 +53,19 @@ passport.use(new LocalStrategy(
       if (err) {done(err);}
       if (res.length === 0) {
         done(null, false);
-      }
-      const hash = res[0].password.toString();
-      const id   = res[0].id;
+      } else {
+        const hash = res[0].password.toString();
+        const id   = res[0].user_id;
+        console.log(hash, id);
 
-      bcrypt.compare(password, hash, function(err, response) {
-        if (response === true) {
-          return done(null, {user_id: id});
-        } else {
-          return done(null, false);
-        }
-      });
+        bcrypt.compare(password, hash, function(err, response) {
+          if (response === true) {
+            return done(null, {user_id: id});
+          } else {
+            return done(null, false);
+          }
+        });
+      }
     });
   }));
 
