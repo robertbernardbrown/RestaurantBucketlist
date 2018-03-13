@@ -1,11 +1,11 @@
 <li class="row" id="label">
   {{restaurant}}
   <div class="btn-group pull-right inline">
-    <button class="delete-rest btn btn-danger" data-id="{{user_id}}">
+    <button class="delete-rest btn btn-danger" data-id="{{restaurant_id}}">
       <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
       Delete
     </button>
-    <button class="change-visited btn btn-primary inline" data-id="{{user_id}}" data-newvisit="{{visited}}">
+    <button class="change-visited btn btn-primary inline" data-id="{{restaurant_id}}" data-newvisit="{{visited}}">
       {{#if visited}}
       <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
       Visited
