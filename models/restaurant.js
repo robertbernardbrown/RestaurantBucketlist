@@ -26,13 +26,13 @@ const restaurant = {
       cb(res);
     });
   },
-  sess: cb => {
-    orm.getSession(res => {
-      cb(res);
-    });
-  },
   login: (username, cb) => {
     orm.login("users", username, (err, res) => {
+      cb(err, res);
+    });
+  },
+  findOne: (username, cb) => {
+    orm.findByUsername("user_id", "users", username, (err, res) => {
       cb(err, res);
     });
   }

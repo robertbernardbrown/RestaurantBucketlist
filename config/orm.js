@@ -42,21 +42,20 @@ const orm = {
       cb(res);
     });
   },
-  getSession: cb => {
-    let query = "SELECT LAST_INSERT_ID() as user_id";
-    pool.query(query, (err, res) => {
-      if (err) throw err;
-      cb(res);
-    });
-  },
   login: (table, username, cb) => {
     let query = "SELECT user_id, password FROM ?? WHERE username = ?";
     pool.query(query, [table, username], (err, res) => {
       if (err) throw err;
       cb(err, res);
     });
-
   },
+  findByUsername: (col, table, username, cb) => {
+    let query = "SELECT ?? FROM ?? WHERE username = ?";
+    pool.query(query, [col, table, username], (err, res) => {
+      if (err) throw err;
+      cb(err, res);
+    });
+  }
 };
 
 module.exports = orm;

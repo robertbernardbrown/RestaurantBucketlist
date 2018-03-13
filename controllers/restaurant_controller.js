@@ -36,13 +36,12 @@ router.post("/register",
       return result.render("register", {errors: errors.array()});
     } 
     else {
-      bcrypt.hash(password, saltRounds, function(err, hash) {
-        restaurant.auth(username, hash, () => {
-          restaurant.sess( (res) => {
-            const user_id = res[0];
-            req.login(user_id, err => {
-              result.redirect("/bucketlist");
-            });
+      bcrypt.hash(password, saltRounds, (err, hash) => {
+        restaurant.auth(username, hash, (res) => {
+          // console.log(res.insertId);
+          const user_id = res.insertId;
+          req.login(user_id, (err) => {
+            result.redirect("/bucketlist");
           });
         });
       });
@@ -65,7 +64,7 @@ router.get("/logout", (req, res) => {
 });
 
 router.get("/bucketlist", authenticationMiddleware(), (req, res) => {
-  restaurant.all(req.user.user_id, data => {
+  restaurant.all(req.user, data => {
     let hbsObject = {
       restaurant: data
     };
@@ -74,9 +73,7 @@ router.get("/bucketlist", authenticationMiddleware(), (req, res) => {
 });
 
 router.post("/bucketlist", authenticationMiddleware(), (req, res) => {
-  // console.log(req.user);
-  // console.log(req.user.user_id);
-  restaurant.create(req.body.restaurant, req.user.user_id, data => {
+  restaurant.create(req.body.restaurant, req.user, data => {
     res.json({ id: data.insertId });
   });
 });
@@ -105,10 +102,12 @@ router.delete("/bucketlist/:id", (req, res) => {
 
 
 passport.serializeUser(function(user_id, done) {
+  // console.log(user_id);
   done(null, user_id);
 });
 
 passport.deserializeUser(function(user_id, done) {
+  // console.log(user_id);
   done(null, user_id);
 });
 

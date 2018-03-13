@@ -12,7 +12,7 @@ var   options;
 const app = express();
 const port = process.env.PORT || 3000;
 
-//LOAD MIDDLEWARE (BODYPARSER & EXPRESS STATIC DIRECTORY)
+//LOAD MIDDLEWARE (BODYPARSER / EXPRESS STATIC DIRECTORY / SESSION STORAGE FOR DB)
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname + "/public")));
@@ -39,10 +39,12 @@ const expHbs = require("express-handlebars");
 app.engine("handlebars", expHbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
+//LOGIN AUTHENTICATION
 app.use(function( req, res, next) {
   res.locals.isAuthenticated = req.isAuthenticated();
   next();
 });
+
 //ROUTER
 const routes = require("./controllers/restaurant_controller");
 app.use(routes);
