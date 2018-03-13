@@ -1,7 +1,6 @@
 $(function() {
   $(".change-visited").on("click", function() {
     let id = $(this).data("id");
-    console.log(id);
     let newVisit = $(this).data("newvisit");
     let newVisitState = {
       visited: newVisit
@@ -38,7 +37,7 @@ $(function() {
   
   $(".delete-rest").on("click", function() {
     var restId = $(this).data("id");
-    $.ajax("/bucketlist" + restId, {
+    $.ajax("/bucketlist/" + restId, {
       type: "DELETE"
     }).then(
       function() {

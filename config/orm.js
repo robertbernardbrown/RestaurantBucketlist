@@ -28,7 +28,7 @@ const orm = {
   },
   deleteOne: (table, id, cb) => {
     let query = "DELETE FROM ??";
-    query    += " WHERE id = ?";
+    query    += " WHERE restaurant_id = ?";
     pool.query(query, [table, id], (err, res) => {
       if (err) throw err;
       cb(res);

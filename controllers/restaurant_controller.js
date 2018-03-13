@@ -95,16 +95,16 @@ router.put("/bucketlist/:id", (req, res) => {
   });
 });
 
-// router.delete("/:id", (req, res) => {
-//   var condition = req.params.id;
-//   restaurant.delete( condition, data => {
-//     if (data.alteredRows === 0) {
-//       return res.status(404).end();
-//     } else {
-//       res.status(200).end();
-//     }
-//   });
-// });
+router.delete("/bucketlist/:id", (req, res) => {
+  var condition = req.params.id;
+  restaurant.delete( condition, data => {
+    if (data.alteredRows === 0) {
+      return res.status(404).end();
+    } else {
+      res.status(200).end();
+    }
+  });
+});
 
 
 passport.serializeUser(function(user_id, done) {
