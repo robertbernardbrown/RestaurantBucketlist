@@ -1,11 +1,12 @@
 $(function() {
   $(".change-visited").on("click", function() {
     let id = $(this).data("id");
+    console.log(id);
     let newVisit = $(this).data("newvisit");
     let newVisitState = {
       visited: newVisit
     };
-    $.ajax("/bucketlist" + id, {
+    $.ajax("/bucketlist/" + id, {
       type: "PUT",
       data: newVisitState
     }).then(

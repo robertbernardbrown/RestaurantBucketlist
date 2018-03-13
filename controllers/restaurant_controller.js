@@ -84,16 +84,16 @@ router.post("/bucketlist", authenticationMiddleware(), (req, res) => {
   });
 });
 
-// router.put("/:id", (req, res) => {
-//   var condition = req.params.id;
-//   restaurant.update(req.body.visited, condition, data => {
-//     if (data.changedRows === 0) {
-//       return res.status(404).end();
-//     } else {
-//       res.status(200).end();
-//     }
-//   });
-// });
+router.put("/bucketlist/:id", (req, res) => {
+  var condition = req.params.id;
+  restaurant.update(req.body.visited, condition, data => {
+    if (data.changedRows === 0) {
+      return res.status(404).end();
+    } else {
+      res.status(200).end();
+    }
+  });
+});
 
 // router.delete("/:id", (req, res) => {
 //   var condition = req.params.id;
