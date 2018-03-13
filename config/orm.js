@@ -11,7 +11,6 @@ const orm = {
   insertOne: (table, restaurant, user_id, cb) => {
     let query = "INSERT INTO ?? ";
     query    += "SET restaurant=?, visited=?, user_id=?";
-    console.log(table, restaurant, false, user_id);
     pool.query(query, [table, restaurant, false, user_id], (err, res) => {
       if (err) throw err;
       cb(res);
@@ -45,7 +44,6 @@ const orm = {
   },
   getSession: cb => {
     let query = "SELECT LAST_INSERT_ID() as user_id";
-    console.log(query);
     pool.query(query, (err, res) => {
       if (err) throw err;
       cb(res);

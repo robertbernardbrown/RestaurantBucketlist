@@ -7,7 +7,6 @@ const restaurant = {
     });
   },
   create: (restaurant, user_id, cb) => {
-    console.log(restaurant, user_id);
     orm.insertOne("restaurants", restaurant, user_id, res => {
       cb(res);
     });

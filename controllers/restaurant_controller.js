@@ -11,8 +11,8 @@ router.get("/", (req, res) => {
 });
 
 router.get("/register", (req, res) => {
-  console.log(req.user);
-  console.log(req.isAuthenticated());
+  // console.log(req.user);
+  // console.log(req.isAuthenticated());
   res.render("register");
 });
 
@@ -39,9 +39,7 @@ router.post("/register",
       bcrypt.hash(password, saltRounds, function(err, hash) {
         restaurant.auth(username, hash, () => {
           restaurant.sess( (res) => {
-            console.log(res);
             const user_id = res[0];
-            console.log(user_id);
             req.login(user_id, err => {
               result.redirect("/bucketlist");
             });
@@ -76,10 +74,9 @@ router.get("/bucketlist", authenticationMiddleware(), (req, res) => {
 });
 
 router.post("/bucketlist", authenticationMiddleware(), (req, res) => {
-  console.log(req.user);
-  console.log(req.user.user_id);
+  // console.log(req.user);
+  // console.log(req.user.user_id);
   restaurant.create(req.body.restaurant, req.user.user_id, data => {
-    console.log(req.body.restaurant, req.body.user, data);
     res.json({ id: data.insertId });
   });
 });
@@ -117,8 +114,8 @@ passport.deserializeUser(function(user_id, done) {
 
 function authenticationMiddleware () {  
   return (req, res, next) => {
-    console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
-    console.log(req.session.passport.user.user_id);
+    // console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
+    // console.log(req.session.passport.user.user_id);
     if (req.isAuthenticated()) return next();
     res.redirect("/login");
   };
