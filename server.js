@@ -60,7 +60,7 @@ passport.use(new LocalStrategy(
         const id   = res[0].user_id;
         bcrypt.compare(password, hash, function(err, response) {
           if (response === true) {
-            return done(null, {user_id: id});
+            return done(null, id);
           } else {
             return done(null, false);
           }
