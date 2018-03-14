@@ -31,14 +31,6 @@ if (process.env.JAWSDB_URL) {
   };
   var sessionStore = new MySQLStore(options);
 }
-// options = {
-//   host     : "us-cdbr-iron-east-05.cleardb.net",
-//   user     : "bbbc852cea0568",
-//   password : "c6f9f3df",
-//   database : "heroku_c7888bcad178b88",
-//   port: 3306
-// };
-// var sessionStore = new MySQLStore(options);
 app.use(session({
   secret: "8QEvskFKPTuZ5k5r7CKF",
   resave: false,
