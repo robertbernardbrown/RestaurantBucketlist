@@ -1,8 +1,8 @@
 const mysql = require("mysql");
 let   pool;  
 
-if (process.env.CLEARDB_DATABASE_URL) {
-  pool = mysql.createPool(process.env.CLEARDB_DATABASE_URL);
+if (process.env.JAWSDB_URL) {
+  pool = mysql.createPool(process.env.JAWSDB_URL);
 } else {
   pool = mysql.createPool({
     host     : "localhost",

@@ -16,8 +16,8 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname + "/public")));
-if (process.env.CLEARDB_DATABASE_URL) {
-  options = (process.env.CLEARDB_DATABASE_URL);
+if (process.env.JAWSDB_URL) {
+  options = (process.env.JAWSDB_URL);
 } else {
   options = {
     host     : "localhost",
