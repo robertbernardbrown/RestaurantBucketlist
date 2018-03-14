@@ -2,6 +2,7 @@ const express       = require("express");
 const bodyParser    = require("body-parser");
 const path          = require("path");
 const restaurant    = require("./models/restaurant");
+const mysql         = require("mysql");
 const session       = require("express-session");
 const passport      = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
@@ -17,7 +18,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname + "/public")));
 if (process.env.JAWSDB_URL) {
-  options = (process.env.JAWSDB_URL);
+  options = process.env.JAWSDB_URL;
+  var connection = mysql.createPool(options);
+  var sessionStore = new MySQLStore({},connection);
 } else {
   options = {
     host     : "localhost",
@@ -26,6 +29,7 @@ if (process.env.JAWSDB_URL) {
     database : "bucketlistdb",
     port: 3306
   };
+  var sessionStore = new MySQLStore(options);
 }
 // options = {
 //   host     : "us-cdbr-iron-east-05.cleardb.net",
