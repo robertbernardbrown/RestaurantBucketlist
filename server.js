@@ -7,7 +7,7 @@ const passport      = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const MySQLStore    = require("express-mysql-session")(session);
 const bcrypt        = require("bcrypt");
-var   options;
+let   options;
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -16,13 +16,24 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname + "/public")));
-options = {
-  host     : "us-cdbr-iron-east-05.cleardb.net",
-  user     : "bbbc852cea0568",
-  password : "c6f9f3df",
-  database : "heroku_c7888bcad178b88",
-  port: 3306
-};
+if (process.env.CLEARDB_DATABASE_URL) {
+  options = (process.env.CLEARDB_DATABASE_URL);
+} else {
+  options = {
+    host     : "localhost",
+    user     : "root",
+    password : "root",
+    database : "bucketlistdb",
+    port: 3306
+  };
+}
+// options = {
+//   host     : "us-cdbr-iron-east-05.cleardb.net",
+//   user     : "bbbc852cea0568",
+//   password : "c6f9f3df",
+//   database : "heroku_c7888bcad178b88",
+//   port: 3306
+// };
 var sessionStore = new MySQLStore(options);
 app.use(session({
   secret: "8QEvskFKPTuZ5k5r7CKF",
