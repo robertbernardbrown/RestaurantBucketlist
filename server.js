@@ -20,7 +20,7 @@ app.use(express.static(path.join(__dirname + "/public")));
 if (process.env.JAWSDB_URL) {
   options = process.env.JAWSDB_URL;
   var connection = mysql.createPool(options);
-  var sessionStore = new MySQLStore({options},connection);
+  var sessionStore = new MySQLStore({},connection);
 } else {
   options = {
     host     : "localhost",
@@ -38,7 +38,7 @@ if (process.env.JAWSDB_URL) {
 //   database : "heroku_c7888bcad178b88",
 //   port: 3306
 // };
-var sessionStore = new MySQLStore(options);
+// var sessionStore = new MySQLStore(options);
 app.use(session({
   secret: "8QEvskFKPTuZ5k5r7CKF",
   resave: false,
