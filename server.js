@@ -20,7 +20,7 @@ app.use(express.static(path.join(__dirname + "/public")));
 if (process.env.JAWSDB_URL) {
   options = process.env.JAWSDB_URL;
   var connection = mysql.createPool(options);
-  var sessionStore = new MySQLStore({},connection);
+  var sessionStore = new MySQLStore({options},connection);
 } else {
   options = {
     host     : "localhost",
