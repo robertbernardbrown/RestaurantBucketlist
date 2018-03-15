@@ -2,11 +2,16 @@ const pool = require("./connection");
 
 const orm = {
   selectAll: (table, user_id, cb) => {
-    let query = "SELECT * FROM ?? WHERE user_id = ?";
-    pool.query(query, [table, user_id], (err, res) => {
-      if (err) throw err;
-      cb(res);
-    });
+    if (typeof table !== "string") {
+      throw new Error("table is not a string");
+    }
+    else {
+      let query = "SELECT * FROM ?? WHERE user_id = ?";
+      pool.query(query, [table, user_id], (err, res) => {
+        if (err) throw err;
+        cb(res);
+      });
+    }
   },
   insertOne: (table, restaurant, user_id, cb) => {
     let query = "INSERT INTO ?? ";
