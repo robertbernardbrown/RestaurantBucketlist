@@ -35,6 +35,11 @@ const restaurant = {
     orm.findByUsername("user_id", "users", username, (err, res) => {
       cb(err, res);
     });
+  },
+  remove: (cb) => {
+    orm.remove("users", (err, res) => {
+      cb(err, res);
+    });
   }
 };
 

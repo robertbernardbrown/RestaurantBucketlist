@@ -60,6 +60,13 @@ const orm = {
       if (err) throw err;
       cb(err, res);
     });
+  },
+  remove: (table, cb) => {
+    let query = "DELETE FROM ?? WHERE user_id = LAST_INSERT_ID()";
+    pool.query(query, [table], (err, res) => {
+      if (err) throw err;
+      cb(err, res);
+    });
   }
 };
 
