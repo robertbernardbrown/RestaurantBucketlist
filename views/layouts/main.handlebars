@@ -18,18 +18,18 @@
   			<h1>Restaurant Bucketlist</h1>
   			<p>Jot down a restaurant and mark it off your list once you've visited!</p>
 			  	<a href="/">
-    				<button type="home" class="btn btn-primary">Home</button>
+    				<button id="home" type="home" class="btn btn-primary">Home</button>
   				</a>
 			    {{#if isAuthenticated}}
   				<a href="/bucketlist">
-    				<button type="bucketlist" class="btn btn-primary">Bucketlist</button>
+    				<button id="bucket" type="bucketlist" class="btn btn-primary">Bucketlist</button>
   				</a>
 				<a href="/logout">
-    				<button type="logout" class="btn btn-primary">Log-Out</button>
+    				<button id="logout" type="logout" class="btn btn-primary">Log-Out</button>
   				</a>
 				{{else}}
 				<a href="/login">
-    				<button type="login" class="btn btn-primary">Log-In</button>
+    				<button id="login" type="login" class="btn btn-primary">Log-In</button>
   				</a>
 				<a href="/register">
     				<button id="register" type="register" class="btn btn-primary">Register</button>
