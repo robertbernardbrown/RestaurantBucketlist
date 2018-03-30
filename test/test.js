@@ -14,32 +14,63 @@ let login_details = {
 };
  
 let register_details = {
-  "username": "test",
+  "username": "test3",
   "password": "testpass",
   "password2": "testpass"
 };
 
-describe("Create Account, Login and Check Token", () => {
-  describe("POST registration", () => {
+server.request.isAuthenticated = function() {
+  return true;
+};
+
+describe("Login", () => {
     
-    it("should register a user", (done) => {
-      chai.request(server)
-        .post("/register")
-        .send(register_details)
-        .end((err, res) => {
-          // console.log(res);
-          res.should.have.status(201);
-          expect(res.body.state).to.be.true;
-        });
-    });
-    afterEach((done) => {
-      restaurant.remove((err) => {
-        console.log(err);
+  it("should login a user", (done) => {
+    chai.request(server)
+      .post("/login")
+      // .set("Token", "text/plain")
+      // .set("content-type", "application/x-www-form-urlencoded")
+      .send(login_details)
+      .end((err, res) => {
+        console.log(res);
+        // console.log(err);
+        res.should.have.status(200);
+        // expect(res).to.redirectTo("/bucketlist");
+        // expect(res).to.have.status(302);
+        // expect(res).to.have.header("location", "/bucketlist");
         done();
       });
-    });
   });
 });
+
+// describe("Create Account, Login and Check Token", () => {
+//   describe("POST registration", () => {
+    
+//     it("should register a user", (done) => {
+//       chai.request(server)
+//         .post("/register")
+//         .set("Token", "text/plain")
+//         .set("content-type", "application/x-www-form-urlencoded")
+//         .send(register_details)
+//         .end((err, res) => {
+//           console.log(res);
+//           // console.log(err);
+//           res.should.have.status(200);
+//           expect(res).to.redirectTo("http://*");
+//           expect(res).to.have.status(302);
+//           expect(res).to.have.header("location", "/bucketlist");
+//           done();
+//         });
+//     });
+//     afterEach((done) => {
+//       restaurant.remove((err) => {
+//         console.log(err);
+//         console.log("err");
+//         done();
+//       });
+//     });
+//   });
+// });
 
 // before(done => {
 //   server.on("serverStarted", () => {
