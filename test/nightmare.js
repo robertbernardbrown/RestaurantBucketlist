@@ -4,14 +4,17 @@ const nightmare = Nightmare({ show: true });
 nightmare
   .goto("https://restaurant-bucketlist.herokuapp.com/")
   .click("#register")
-  .type("#exampleUsername1", "Nightmare")
+  .type("#exampleUsername1", "Nightmare6")
   .type("#exampleInputPassword1", "lol")
   .type("#exampleInputPassword2", "lol")
   .click("#submit")
-
-  .click("#search_button_homepage")
-  .wait("#r1-0 a.result__a")
-  .evaluate(() => document.querySelector("#r1-0 a.result__a").href)
+  .wait("#rest")
+  .type("#rest", "McNaldo's")
+  .click(".submit-btn")//
+  .wait("button.change-visited")
+  .click("button.change-visited")
+  .evaluate(() => document.querySelector("#row").href)
+  .click("button.delete-rest")
   .end()
   .then(console.log)
   .catch(error => {
