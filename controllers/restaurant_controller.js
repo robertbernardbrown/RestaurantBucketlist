@@ -41,6 +41,7 @@ router.post("/register",
           // console.log(res.insertId);
           const user_id = res.insertId;
           req.login(user_id, (err) => {
+            console.log(result);
             result.redirect("/bucketlist");
           });
         });
