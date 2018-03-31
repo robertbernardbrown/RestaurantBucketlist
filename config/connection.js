@@ -10,7 +10,7 @@ if (process.env.JAWSDB_URL) {
     password : "root",
     database : "bucketlistdb",
     port: 3306
-  });
+  }); 
 }
 
 // const pool  = mysql.createPool({
