@@ -19,17 +19,15 @@ let register_details = {
   "password2": "testpass"
 };
 
-server.request.isAuthenticated = function() {
-  return true;
-};
+// server.request.isAuthenticated = function() {
+//   return true;
+// };
 
 describe("Login", () => {
     
   it("should login a user", (done) => {
     chai.request(server)
       .post("/login")
-      // .set("Token", "text/plain")
-      // .set("content-type", "application/x-www-form-urlencoded")
       .send(login_details)
       .end((err, res) => {
         console.log(res);
