@@ -11,7 +11,7 @@ const bcrypt        = require("bcrypt");
 let   options;
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 //LOAD MIDDLEWARE (BODYPARSER / EXPRESS STATIC DIRECTORY / SESSION STORAGE FOR DB)
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -27,9 +27,11 @@ if (process.env.JAWSDB_URL) {
     user     : "root",
     password : "root",
     database : "bucketlistdb",
-    port: 3306
+    port: 3000
   };
+  console.log(options);
   var sessionStore = new MySQLStore(options);
+  console.log(sessionStore);
 }
 app.use(session({
   secret: "8QEvskFKPTuZ5k5r7CKF",
