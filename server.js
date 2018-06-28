@@ -44,9 +44,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //LOAD MIDDLEWARE (HANDLEBARS)
-const expHbs = require("express-handlebars");
-app.engine("handlebars", expHbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
+// const expHbs = require("express-handlebars");
+// app.engine("handlebars", expHbs({ defaultLayout: "main" }));
+// app.set("view engine", "handlebars");
 
 //LOGIN AUTHENTICATION
 app.use(function( req, res, next) {
@@ -55,6 +55,9 @@ app.use(function( req, res, next) {
 });
 
 //ROUTER
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 const routes = require("./controllers/restaurant_controller");
 app.use(routes);
 
@@ -78,8 +81,12 @@ passport.use(new LocalStrategy(
     });
   }));
 
-app.listen(port, ()=> {
-  console.log("App is running on port " + port);
+app.get("*", function(req, res) {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
+
+app.listen(port, function() {
+  console.log(`🌎 ==> Server now on port ${port}!`);
 });
 
 module.exports = app;
